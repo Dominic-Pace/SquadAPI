@@ -4,6 +4,7 @@ import passport from 'passport';
 import User from '../../models/user';
 
 import { authenticate } from '../../middleware/auth';
+import { defaultResponseModel } from '../../utils/response';
 
 export default({ config, db }) => {
   let api = Router();
@@ -153,7 +154,17 @@ export default({ config, db }) => {
       badges: req.body.badges
 
     }), req.body.password, (err, user) => {
-      if (err){
+      if (err) {
+        console.log('error', err.name)
+        if(err.name === 'MissingUsernameError' || err.name === 'MissingPasswordError'){
+          res.status(401);
+          res.json(defaultResponseModel(false, 'Must have a valid email or password.', []));
+        } else if(err.name === 'UserExistsError'){
+          res.status(401).json(defaultResponseModel(false, 'A user already exists with this email. Please try again', []));
+        } else if(err.name === 'ValidationError'){
+          res.status(401).json(defaultResponseModel(false, 'Invalid JSON request. Please check and try again', []));
+        }
+
         res.send(err);
       }
 
@@ -162,7 +173,11 @@ export default({ config, db }) => {
           session: false
         }
       )(req, res, () => {
-        res.status(200).send('Successfully Created New User')
+        console.log('res', res.token);
+        console.log('user', user._id);
+        res.status(201).send(defaultResponseModel(true, 'New User registered successfully.', {
+          _id: user._id
+        }))
       });
     });
   });
@@ -252,13 +267,12 @@ export default({ config, db }) => {
    *             "data": []
    *           }
    */
-  api.get('/:id', (req, res) => {
+  api.get('/:id', authenticate, (req, res) => {
     User.findById(req.params.id, (err, user) => {
       if (err) {
-        console.log('error: ', err)
         if(err.kind === 'ObjectId') {
-          res.status(200);
-          res.json({ code: 200, status: 'Success', data: [] })
+          res.status(401);
+          res.json({ code: 200, status: 'Failure', data: [] })
         }
       }
       res.json({ code: 200, status: 'Success', data: user });
