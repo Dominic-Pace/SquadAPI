@@ -38,6 +38,7 @@
   "homepage": "https://github.com/Dominic-Pace/mongolearn#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "express-jwt": "^5.3.0",
     "jsonwebtoken": "^7.4.1",
