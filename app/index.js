@@ -41,8 +41,8 @@ const spec = swaggerJSDoc({
     ]
   },
   apis: [
-    'src/controller/auth/index.js',
-    'src/controller/user/index.js'
+    'app/controller/auth/index.js',
+    'app/controller/user/index.js'
   ],
 
 });

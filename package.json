@@ -1,19 +1,20 @@
 {
-  "name": "mongolearn",
+  "name": "squad-api",
   "version": "0.0.1",
-  "description": "A Restaurant API",
+  "description": "API for Squad",
   "main": "dist",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
-    "build": "babel src -s D -d dist --presets es2015,stage-0",
+    "dev": "NODE_ENV=development nodemon -w app --exec \"babel-node app --presets es2015,stage-0\"",
+    "build": "babel app -s D -d dist --presets es2015,stage-0",
     "start": "NODE_ENV=production pm2 start dist",
+    "preinstall": "npm install pm2 -g",
     "prestart": "npm run -s build",
-    "lint": "eslint src",
+    "lint": "eslint app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dominic-Pace/mongolearn.git"
+    "url": "git+https://github.com/Dominic-Pace/SquadAPI.git"
   },
   "keywords": [
     "mongo"
@@ -33,9 +34,9 @@
   },
   "author": "Dominic Pace <dpace@nhpace.net>",
   "bugs": {
-    "url": "https://github.com/Dominic-Pace/mongolearn/issues"
+    "url": "https://github.com/Dominic-Pace/SquadAPI/issues"
   },
-  "homepage": "https://github.com/Dominic-Pace/mongolearn#readme",
+  "homepage": "https://github.com/Dominic-Pace/SquadAPI#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
