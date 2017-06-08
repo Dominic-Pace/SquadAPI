@@ -81,5 +81,6 @@ app.get('/swagger.json', function(req, res) {
 app.use('/v1/docs', swaggerUi.serve, swaggerUi.setup(spec));
 
 app.server.listen(config.port);
+console.log(`Started on port ${app.server.address().port}`);
 
 export default app;
