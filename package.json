@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "NODE_ENV=development nodemon -w app --exec \"babel-node app --presets es2015,stage-0\"",
     "build": "babel app -s D -d dist --presets es2015,stage-0",
-    "start": "NODE_ENV=production pm2 start dist",
-    "preinstall": "npm install pm2 -g npm install --save-dev babel-cli",
+    "start": "pm2 start dist",
+    "preinstall": "npm install pm2 -g",
     "prestart": "npm run -s build",
     "lint": "eslint app",
     "test": "echo \"Error: no test specified\" && exit 1"
