@@ -8,6 +8,7 @@
     "build": "babel app -s D -d dist",
     "start": "node ./dist/index.js",
     "prestart": "npm run -s build",
+    "preinstall": "npm install babel-cli babel-presets-es2015 --save",
     "lint": "eslint app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
