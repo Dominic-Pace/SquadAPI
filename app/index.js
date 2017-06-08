@@ -80,6 +80,6 @@ app.get('/swagger.json', function(req, res) {
 
 app.use('/v1/docs', swaggerUi.serve, swaggerUi.setup(spec));
 
-app.server.listen(config.port);
+app.server.listen(process.env.PORT || 3005);
 
 export default app;
